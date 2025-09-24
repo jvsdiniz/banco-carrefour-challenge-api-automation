@@ -212,6 +212,23 @@ class usersServices {
         })
     }
 
+    cadastrarUsuarioComCampoExtraInexistente() {
+        const usuario = this.gerarDadosNovoUsuario()
+
+        return cy.api({
+            method: 'POST',
+            url: `${Cypress.env("apiUrl")}/usuarios`,
+            body: {
+                "nome": usuario.nome,
+                "email": usuario.email,
+                "password": usuario.senha,
+                "administrador": "true",
+                "teste": "teste de envio de um campo inexistente"
+            },
+            failOnStatusCode: false
+        })
+    }
+
     validarUsuarioBodyVazio() {
         cy.get('@usuarioBodyVazio').then((response) => {
             const body = response.body;
@@ -242,6 +259,28 @@ class usersServices {
         })
     }
 
+    atualizarEmailExistente() {
+        return cy.get('@buscarUsuario').then((usuario) => {
+            const id = usuario.body._id
+            const usuarioExistente = usuario.body
+
+            return cy.get('@buscaTodosOsUsuarios').then((todosUsuarios) => {
+                const emailUtilizado = todosUsuarios.body.usuarios[0].email
+
+                usuarioExistente.email = emailUtilizado;
+                delete usuarioExistente._id;
+
+                return cy.api({
+                    method: 'PUT',
+                    url: `${Cypress.env("apiUrl")}/usuarios/${id}`,
+                    body: usuarioExistente,
+                    failOnStatusCode: false
+                })
+            })
+
+        })
+    }
+
     validarIdNaoPermitido() {
         cy.get('@usuarioAtualizado').then((response) => {
             expect(response.status).to.eq(400);
@@ -267,6 +306,39 @@ class usersServices {
             expect(response.body.message).to.eq("Nenhum registro excluído");
         })
         cy.screenshot();
+    }
+
+    validarEmailUtilizado() {
+        cy.get('@usuarioAtualizadoEmailExistente').then((response) => {
+            expect(response.status).to.eq(400);
+            expect(response.body.message).to.eq("Este email já está sendo usado");
+        })
+        cy.screenshot();
+    }
+
+    validarCadastroComCampoExtraInexistente() {
+        cy.get('@campoExtraInexistente').then((response) => {
+            expect(response.status).to.eq(400);
+            expect(response.body.teste).to.eq("teste não é permitido");
+        })
+        cy.screenshot();
+    }
+
+    atualizarCadastroComCampoExtraInexistente(){
+        return cy.get('@buscarUsuario').then((usuario) => {
+            const id = usuario.body._id
+            const usuarioExistente = usuario.body
+
+            usuarioExistente.teste = "teste de envio de um campo inexistente";
+            delete usuarioExistente._id;
+
+            return cy.api({
+                method: 'PUT',
+                url: `${Cypress.env("apiUrl")}/usuarios/${id}`,
+                body: usuarioExistente,
+                failOnStatusCode: false
+            })
+        })
     }
 
 }

@@ -1,4 +1,4 @@
-Feature: API | Usuário
+Feature: API de Usuário
 
 Scenario: Sucesso | Buscar todos os usuarios
     Given que eu queira buscar a lista contendo todos os usuários
@@ -49,3 +49,18 @@ Scenario: Falha | Excluir usuario inexistente
     Given que eu tenha um registro invalido
     When eu deletar o usuario 
     Then nenhum registro deve ser excluído
+
+Scenario: Falha | Atualizar email para um que já está sendo usado
+    Given que eu tenha um usuario cadastrado
+    When o email for atualizado para um que ja esta sendo usado
+    Then deve ser retornado a mensagem que o email ja esta sendo usado
+
+Scenario: Falha | Cadastro com inclusão de um campo extra não existente
+    Given que eu queira cadastrar um novo usuario no sistema
+    When a chamada é realizada com um campo extra não permitido
+    Then deve ser retornada a mensagem de que o campo não é permitido
+
+Scenario: Falha | Atualizar usuário com inclusão de um campo extra não existente
+    Given que eu tenha um usuario cadastrado
+    When a chamada para atualizar as informacoes é realizada com um campo extra não permitido
+    Then deve ser retornada a mensagem de que o campo não é permitido

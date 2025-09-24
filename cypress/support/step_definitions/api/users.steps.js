@@ -115,3 +115,26 @@ When("eu deletar o usuario", () => {
 Then("nenhum registro deve ser excluído", () => {
     usersServices.validarDeletarUsuarioInexistente();
 });
+
+When("o email for atualizado para um que ja esta sendo usado", () => {
+    usersServices.buscarUsuarioAtravesDoRegistro().as('buscarUsuario');
+    usersServices.buscarTodosOsUsuarios().as('buscaTodosOsUsuarios');
+    usersServices.atualizarEmailExistente().as('usuarioAtualizadoEmailExistente');
+});
+
+Then("deve ser retornado a mensagem que o email ja esta sendo usado", () => {
+    usersServices.validarEmailUtilizado();
+});
+
+When("a chamada é realizada com um campo extra não permitido", () => {
+    usersServices.cadastrarUsuarioComCampoExtraInexistente().as('campoExtraInexistente');
+});
+
+Then("deve ser retornada a mensagem de que o campo não é permitido", () => {
+    usersServices.validarCadastroComCampoExtraInexistente();
+});
+
+When("a chamada para atualizar as informacoes é realizada com um campo extra não permitido", () => {
+    usersServices.buscarUsuarioAtravesDoRegistro().as('buscarUsuario'); 
+    usersServices.atualizarCadastroComCampoExtraInexistente().as('campoExtraInexistente');
+});

@@ -91,6 +91,7 @@ BANCO-CARREFOUR-CHALLENGE-API-AUTO/
 
 ## 📚 Casos de Teste
 Os testes automatizados deste projeto foram organizados em dois grupos principais:
+
 ✅ Cenários de Sucesso (Fluxo Feliz):
 Representam os fluxos positivos da aplicação, ou seja, quando a API responde conforme o esperado em condições ideais. Exemplos incluem:
 - Cadastro de usuário com dados válidos;

@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "cypress:run": "npm run clean:reports && npx cypress run",
+    "cypress:open": "npm run clean:reports && npx cypress open",
+    "clean:reports": "rimraf cypress/reports",
+    "generate:html": "marge -o cypress/reports/mochawesome -i cypress/reports/mochawesome"
   },
   "repository": {
     "type": "git",
@@ -22,7 +25,12 @@
     "@cypress/webpack-preprocessor": "^7.0.1",
     "@faker-js/faker": "^10.0.0",
     "cypress": "^15.2.0",
-    "cypress-plugin-api": "^2.11.2"
+    "cypress-mochawesome-reporter": "^4.0.2",
+    "cypress-on-fix": "^1.1.0",
+    "cypress-plugin-api": "^2.11.2",
+    "mochawesome": "^7.1.4",
+    "mochawesome-merge": "^5.0.0",
+    "rimraf": "^6.0.1"
   },
   "cypress-cucumber-preprocessor": {
     "nonGlobalStepDefinitions": true,

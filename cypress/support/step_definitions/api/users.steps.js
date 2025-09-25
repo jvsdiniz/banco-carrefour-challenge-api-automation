@@ -1,4 +1,5 @@
 import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
+import 'cypress-mochawesome-reporter/cucumberSupport'
 import UsersServices from "../../../e2e/services/usersServices"
 import * as utils from "../../utils"
 

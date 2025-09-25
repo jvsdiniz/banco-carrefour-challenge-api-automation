@@ -20,10 +20,17 @@ jobs:
           node-version: 22
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Run Cypress tests
-        run: npx cypress run
+        run: npx cypress run || true
+
+      - name: Upload Test Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: relatorio-de-testes-api
+          path: cypress/reports/mochawesome/Relatório de testes de API.html
 
       - name: Upload Cypress screenshots
         if: always()

@@ -16,7 +16,7 @@ Este repositório tem como objetivo demonstrar automações aplicadas ao endpoin
 
 Antes de rodar o projeto, verifique se os seguintes pré-requisitos estão atendidos:
 
-- Node.js instalado (versão recomendada: 20 ou superior)`
+- Node.js instalado (versão recomendada: 20 ou superior)
 - npm ou Yarn instalado
 - Sistema operacional compatível (Windows, macOS ou Linux)
 
@@ -108,5 +108,6 @@ Essa separação tem como objetivo facilitar a leitura, manutenção e análise 
 - Os resultados podem ser acompanhados na aba Actions do repositório
 
 ## 👨‍💻 Autor
-- Desenvolvido por João Diniz
+Desenvolvido por João Diniz
 - 📧 jdinizctt@gmail.com
+- 📧 [Linkedin](https://www.linkedin.com/in/jvsdiniz/)
